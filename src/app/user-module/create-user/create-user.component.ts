@@ -51,18 +51,19 @@ export class CreateUserComponent {
         Validators.minLength(2),
         Validators.maxLength(30),
       ]),
-      gender: new FormControl('female', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      gender: new FormControl('male', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+      )]),
       mobile: new FormControl('', [
         Validators.required,
         Validators.maxLength(10),
         Validators.minLength(10),
-        Validators.pattern('[0-9]*'),
+        Validators.pattern(/^[6-9]\d{9}$/),
       ]),
       category: new FormControl('', Validators.required),
       selecttechnology: this.addTechnologiesControls(),
       profilepic: new FormControl('', [
-        Validators.required,
+        // Validators.required,
         Validators.pattern('.+(jpg|png|jpeg)'),
       ]),
     });

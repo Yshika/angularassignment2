@@ -23,7 +23,15 @@ export class SharedServiceService {
     this.technology_array.push(technology);
     this.imageUrl_array.push(imageUrl);
   }
-  getName(){
-    return this.name_array;
+  getData(param:string){
+    switch(param){
+      case "name" : return this.name_array; break; 
+      case "gender" : return this.gender_array; break; 
+      case "email" : return this.email_array; break; 
+      case "mobile" : return this.mobile_array; break;
+      case "category" : return this.category_array; break;
+      case "technology" : return this.technology_array; break;
+      case "imageUrl" : return this.imageUrl_array; break;
+    }
   }
 }
