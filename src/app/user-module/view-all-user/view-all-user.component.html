@@ -1,0 +1,30 @@
+<body>
+  <table
+    class="table table_style table-responsive-lg table-hover table_borderless bg-white"
+    id="table"
+    onload="showDataFromLocalStorage()"
+  >
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile No.</th>
+        <th scope="col">Category</th>
+        <th scope="col">Technology</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of this.name; let idx = index">
+        <td class="text-warning">{{ this.name[idx] }}</td>
+        <td class="text-warning">{{ this.gender[idx] }}</td>
+        <td class="text-warning">{{ this.email[idx] }}</td>
+        <td class="text-warning">{{ this.mobile[idx] }}</td>
+        <td class="text-warning">{{ this.category[idx] }}</td>
+        <td class="text-warning">{{ this.technology[idx] }}</td>
+      </tr>
+    </tbody>
+    <tbody></tbody>
+  </table>
+  <div *ngFor="let item of name1_array">{{item}}</div>
+</body>
