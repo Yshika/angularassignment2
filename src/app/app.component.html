@@ -1,17 +1,20 @@
-<div class="jumbotron">
-  <div class="container bg-white">
-      <div class="row m-3">
-          <div class="col-sm-5 m-3">
-              <a class="bg-success text-white p-2 " routerLink="/users/create" > Create User </a>
-          </div>
-          <div class="col-sm-5 m-3">
-              <a class="bg-success text-white p-2 " routerLink="/users/view"> View All User </a>
-          </div>
+<div class="jumbotron mb-0">
+  <div class="container">
+    <div class="row mx-1 justify-content-center">
+      <div class="mr-1 my-2">
+        <a class="bg-info btn text-white p-2 link" routerLink="/users/create">
+          Create User
+        </a>
       </div>
-      
-  <div>
-  <router-outlet></router-outlet> 
-  
- 
+      <div class="ml-1 my-2">
+        <a class="bg-info btn text-white p-2 link" routerLink="/users/view">
+          View All Users
+        </a>
+      </div>
+    </div>
+    <hr />
+    <div class="m-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
-

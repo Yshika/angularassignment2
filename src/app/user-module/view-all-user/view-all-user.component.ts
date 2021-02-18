@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedServiceService } from 'src/app/shared-service.service';
+import { ProfileDetails } from 'src/app/shared-service.service';
 @Component({
   selector: 'app-view-all-user',
   templateUrl: './view-all-user.component.html',
-  styleUrls: ['./view-all-user.component.css']
+  styleUrls: ['./view-all-user.component.css'],
 })
 export class ViewAllUserComponent implements OnInit {
-
-  
-
-  name_array =[];
+  name_array = [];
   gender_array = [];
   email_array = [];
   mobile_array = [];
@@ -17,19 +14,15 @@ export class ViewAllUserComponent implements OnInit {
   technology_array = [];
   imageUrl_array = [];
 
-  constructor(private viewUser: SharedServiceService) { }
+  constructor(private viewUser: ProfileDetails) {}
 
   public ngOnInit(): void {
-    
-    this.name_array = this.viewUser.getData("name");
-    this.gender_array = this.viewUser.getData("gender");
-    this.email_array = this.viewUser.getData("email");
-    this.mobile_array = this.viewUser.getData("mobile");
-    this.category_array = this.viewUser.getData("category");
-    this.technology_array = this.viewUser.getData("technology");
-    this.imageUrl_array = this.viewUser.getData("imageUrl");
-
+    this.name_array = this.viewUser.getData('name');
+    this.gender_array = this.viewUser.getData('gender');
+    this.email_array = this.viewUser.getData('email');
+    this.mobile_array = this.viewUser.getData('mobile');
+    this.category_array = this.viewUser.getData('category');
+    this.technology_array = this.viewUser.getData('technology');
+    this.imageUrl_array = this.viewUser.getData('imageUrl');
   }
-
-  
 }

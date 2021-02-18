@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   FormBuilder,
-  NgForm,
   Validators,
   FormArray,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { SharedServiceService } from 'src/app/shared-service.service';
+import { ProfileDetails } from 'src/app/shared-service.service';
 
 @Component({
   selector: 'app-create-user',
@@ -23,28 +21,25 @@ export class CreateUserComponent {
 
   closeResult = '';
 
-  technologies: Array<String> = ['C', 'C++', 'Java', 'Python', 'JavaScript'];
+  technologies: Array<String> = [
+    'ReactJS',
+    'Angular',
+    'JavaScript',
+    'PHP',
+    'C#',
+  ];
   selectedTechnologies = [];
   selectTechnologyError: Boolean = true;
-  name_array = [];
-  gender_array = [];
-  email_array = [];
-  mobile_array = [];
-  category_array = [];
-  technology_array = [];
-  imageUrl_array = [];
-  signupForm: FormGroup;
+  userForm: FormGroup;
 
   constructor(
     private _fb: FormBuilder,
-    private router: Router,
     private modalService: NgbModal,
-    private createUserService: SharedServiceService
+    private createUserService: ProfileDetails
   ) {}
 
-  //validation starts...
   ngOnInit() {
-    this.signupForm = new FormGroup({
+    this.userForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
         Validators.pattern('[a-z A-Z]*'),
@@ -52,8 +47,10 @@ export class CreateUserComponent {
         Validators.maxLength(30),
       ]),
       gender: new FormControl('male', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
-      )]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+      ]),
       mobile: new FormControl('', [
         Validators.required,
         Validators.maxLength(10),
@@ -61,13 +58,11 @@ export class CreateUserComponent {
         Validators.pattern(/^[6-9]\d{9}$/),
       ]),
       category: new FormControl('', Validators.required),
-      selecttechnology: this.addTechnologiesControls(),
-      profilepic: new FormControl('', [
-        // Validators.required,
-        Validators.pattern('.+(jpg|png|jpeg)'),
-      ]),
+      selectTechnology: this.addTechnologiesControls(),
+      profilepic: new FormControl('', [Validators.pattern('.+(jpg|png|jpeg)')]),
     });
   }
+
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
     var reader = new FileReader();
@@ -77,11 +72,8 @@ export class CreateUserComponent {
     reader.readAsDataURL(this.fileToUpload);
   }
 
-  //validation ends...
-
-  //checkbox customvalidation...
   addTechnologiesControls() {
-    const arr = this.technologies.map((element) => {
+    const arr = this.technologies.map(() => {
       return this._fb.control(false);
     });
 
@@ -89,7 +81,7 @@ export class CreateUserComponent {
   }
 
   get technologiesArray() {
-    return <FormArray>this.signupForm.get('selecttechnology');
+    return <FormArray>this.userForm.get('selectTechnology');
   }
 
   getSelectedTechnologies() {
@@ -105,17 +97,14 @@ export class CreateUserComponent {
   }
 
   checkTechnologyIsTouched() {
-    let flg = false;
+    let flag = false;
     this.technologiesArray.controls.forEach((control) => {
       if (control.touched) {
-        flg = true;
+        flag = true;
       }
     });
-    return flg;
+    return flag;
   }
-  //checkbox customvalidation ends...
-
-  //modal starts...
 
   open(content) {
     this.modalService
@@ -139,31 +128,17 @@ export class CreateUserComponent {
       return `with: ${reason}`;
     }
   }
-
-  //modal ends...
-
-  showData() {}
-
-  saveData() {
-    this.name_array.push(this.signupForm.value.name); //will store the name in name_array....
-    this.gender_array.push(this.signupForm.value.gender);
-    this.email_array.push(this.signupForm.value.email); //will store the name in email_array....
-    this.mobile_array.push(this.signupForm.value.mobile); //will store the name in number_array....
-    this.category_array.push(this.signupForm.value.category);
-    this.technology_array.push(this.selectedTechnologies);
-    this.imageUrl_array.push(this.imageUrl);
-
-    this.createUserService.saveData(this.signupForm.value.name,this.signupForm.value.gender,this.signupForm.value.email,this.signupForm.value.mobile,this.signupForm.value.category,
-      this.selectedTechnologies,this.imageUrl);
-
-    localStorage.setItem('name', JSON.stringify(this.name_array));
-    localStorage.setItem('gender', JSON.stringify(this.gender_array));
-    localStorage.setItem('email', JSON.stringify(this.email_array));
-    localStorage.setItem('mobile', JSON.stringify(this.mobile_array));
-    localStorage.setItem('category', JSON.stringify(this.category_array));
-    localStorage.setItem('technology', JSON.stringify(this.technology_array));
-    localStorage.setItem('imageUrl', JSON.stringify(this.imageUrl_array));
-
-    alert('Records has been saved');
+  showData() {
+    this.createUserService.setData(
+      this.userForm.value.name,
+      this.userForm.value.gender,
+      this.userForm.value.email,
+      this.userForm.value.mobile,
+      this.userForm.value.category,
+      this.selectedTechnologies,
+      this.imageUrl
+    );
+    alert('Record saved Successfully');
+    this.userForm.reset();
   }
 }

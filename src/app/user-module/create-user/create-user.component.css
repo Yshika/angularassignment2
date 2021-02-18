@@ -1,9 +1,19 @@
-input.ng-invalid.ng-touched
- {
-     border-color: red;
- }
- select.ng-invalid.ng-touched
- {
-     border-color: red;
- }
- 
+input.ng-invalid.ng-touched {
+  border-color: red;
+}
+select.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.previewBtn {
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 40%);
+}
+
+.inputPic {
+  max-width: -webkit-fill-available;
+}
+
+.imgProfile {
+  height: 180px;
+  width: 180px;
+}

@@ -5,25 +5,21 @@ import { ViewAllUserComponent } from './view-all-user/view-all-user.component';
 import { UserModuleRoutingModule } from './user-module-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-
-//import { NgbModalBasic } from './modal-basic';
-
+import {
+  NgbPaginationModule,
+  NgbAlertModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [CreateUserComponent, ViewAllUserComponent, ],
+  declarations: [CreateUserComponent, ViewAllUserComponent],
   imports: [
     CommonModule,
     UserModuleRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    //NgbModule.forRoot(),
-    NgbPaginationModule, 
+    NgbPaginationModule,
     NgbAlertModule
-    //CreateUserComponent,
-    //ViewAllUserComponent
-  ]
+  ],
 })
-export class UserModuleModule { }
+export class UserModuleModule {}

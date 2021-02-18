@@ -1,0 +1,13 @@
+.jumbotron{
+    background-color: darkcyan;
+    font-family: 'Courier New', Courier, monospace;
+}
+.container{
+    background-color: aliceblue;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 5px 10px 18px rgb(0 0 0 / 75%);
+}
+.link{
+    border-radius: 6px;
+}
